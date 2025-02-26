@@ -1,0 +1,22 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: go-end2-end
+  annotations:
+    #
+    nginx.ingress.kubernetes.io/rewrite-target: /
+
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: go-end2-end.local
+      http:
+        paths:
+          - pathType: Prefix
+            path: /
+            backend:
+              service:
+#                pod name
+                name: go-end2-end
+                port:
+                  number: 80

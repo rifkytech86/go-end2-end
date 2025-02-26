@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: go-end2-end
+  labels:
+    app: go-end2-end
+spec:
+  selector:
+    name: go-end2-end
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 8080
+  type: ClusterIP
