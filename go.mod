@@ -1,3 +1,3 @@
-module go-end2-end
+module github.com/go-end2-end
 
-go 1.23.0
+go 1.21.1
