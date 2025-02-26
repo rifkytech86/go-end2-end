@@ -386,3 +386,52 @@ https://app.docker.com/settings/personal-access-tokens
 ```json
 
 ```
+
+
+### install argo cd
+
+```json
+  kubectl create namespace argocd
+kubectl apply -n argocd -f https://raw.githubusercontent.com/argoproj/argo-cd/stable/manifests/install.yaml
+```
+
+
+Access the Argo CD UI (Loadbalancer service)
+```json
+  kubectl patch svc argocd-server -n argocd -p '{"spec": {"type": "LoadBalancer"}}'
+
+  kubectl get svc -n argocd
+
+  kubectl get nodes -o wide
+
+```
+
+try access externapl-IP with port service 
+
+example 
+```json
+https://18.206.161.89:31477/
+```
+
+```json
+  kubectl get secrets -n argocd
+```
+
+
+Update secret
+```json
+apiVersion: v1
+data:
+  password: xxxxxxx==
+
+```
+
+encode
+
+```json
+ echo xxxxxxx | base64 --decode
+```
+
+
+
+
