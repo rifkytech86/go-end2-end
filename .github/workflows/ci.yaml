@@ -61,21 +61,21 @@ jobs:
           push: true
           tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-end2-end:${{github.run_id}}
 
-    update-newtag-in-helm-chart:
-      runs-on: ubuntu-latest
-      needs: push
-      steps:
-        - name: Checkout repository
-          uses: actions/checkout@v4
-          with:
-            token: ${{ secrets.TOKEN }}
-        - name: Update tag in Helm chart
-          run: |
-            sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-end2-end/values.yaml
-        - name: Commit and push changes
-          run: |
-            git config --global user.email "rifkytech86@gmail.com"
-            git config --global user.name "rifky"
-            git add helm/go-end2-end//values.yaml
-            git commit -m "Update tag in Helm chart"
-            git push
+  update-newtag-in-helm-chart:
+    runs-on: ubuntu-latest
+    needs: push
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.TOKEN }}
+      - name: Update tag in Helm chart
+        run: |
+          sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-end2-end/values.yaml
+      - name: Commit and push changes
+        run: |
+          git config --global user.email "rifkytech86@gmail.com"
+          git config --global user.name "rifky"
+          git add helm/go-end2-end//values.yaml
+          git commit -m "Update tag in Helm chart"
+          git push
