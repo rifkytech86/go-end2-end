@@ -3,7 +3,7 @@ replicaCount: 1
 image:
   repository: rifky86/go-end2-end
   pullPolicy: IfNotPresent
-  tag: "13547679567"
+  tag: "13547833468"
 
 ingress:
   enabled: false
