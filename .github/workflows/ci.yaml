@@ -4,8 +4,9 @@ on:
     branches:
       - main
     path-ignore:
-      - 'README.md'
       - 'helm/**'
+      - 'k8s/**'
+      - 'README.md'
 jobs:
   build:
     runs-on: ubuntu-latest
