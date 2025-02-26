@@ -22,7 +22,7 @@ jobs:
       run: go build -o go-end2-end
 
     - name: Test
-      run: go test ./..
+      run: go test ./...
 
 # code quality
   code-quality:
