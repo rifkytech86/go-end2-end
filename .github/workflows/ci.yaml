@@ -1,0 +1,81 @@
+name: CI
+on:
+  push:
+    branches:
+      - main
+    path-ignore:
+      - 'README.md'
+      - 'helm/**'
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - names: Checkout repository
+      uses: action/checkout@v4
+
+    - names: Setup Go 1.23
+      uses: action/checkout@v2
+      with:
+        go-version:1.23
+
+    - names: Build
+      run: go build -o go-end2-end
+
+    - names: Build
+      run: go test ./..
+
+# code quality
+  code-quality:
+      run-on: ubuntu-latest
+      steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Run Golangci-lint
+        uses: golangci/golangci-lint-action@v6
+        with:
+          version: v1.56.2
+
+
+  push:
+    runs-on: ubuntu-latest
+    needs: build
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v1
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKERHUB_USERNAME }}
+          password: ${{ secrets.DOCKERHUB_TOKEN }}
+
+      - name: Build and Push action
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          file: ./Dockerfile
+          push: true
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-end2-end:${{github.run_id}}
+
+    update-newtag-in-helm-chart:
+      runs-on: ubuntu-latest
+      needs: push
+      steps:
+        - name: Checkout repository
+          uses: actions/checkout@v4
+          with:
+            token: ${{ secrets.TOKEN }}
+        - name: Update tag in Helm chart
+          run: |
+            sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-end2-end/values.yaml
+        - name: Commit and push changes
+          run: |
+            git config --global user.email "rifkytech86@gmail.com"
+            git config --global user.name "rifky"
+            git add helm/go-end2-end//values.yaml
+            git commit -m "Update tag in Helm chart"
+            git push

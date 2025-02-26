@@ -4,11 +4,11 @@ WORKDIR /app
 COPY go.mod .
 RUN go mod download
 
-# COPU to docker image
+# COPY to docker image
 COPY . .
 
 # run local
-RUN go build -o main .
+RUN CGO_ENABLED=0 GOOS=linux GOARCH=amd64 go build -o main .
 
 
 
