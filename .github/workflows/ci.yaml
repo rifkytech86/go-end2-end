@@ -82,6 +82,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.TOKEN }}
+          ref: main
       - name: Update tag in Helm chart
         run: |
           sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-end2-end/values.yaml
@@ -89,6 +90,7 @@ jobs:
         run: |
           git config --global user.email "rifkytech86@gmail.com"
           git config --global user.name "rifky"
-          git add helm/go-end2-end//values.yaml
+          git checkout main
+          git add helm/go-end2-end/values.yaml
           git commit -m "Update tag in Helm chart  [skip ci] "
           git push
