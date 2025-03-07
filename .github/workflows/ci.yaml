@@ -85,5 +85,5 @@ jobs:
           git config --global user.email "rifkytech86@gmail.com"
           git config --global user.name "rifky"
           git add helm/go-end2-end//values.yaml
-          git commit -m "Update tag in Helm chart"
+          git commit -m "Update tag in Helm chart  [skip ci] "
           git push
