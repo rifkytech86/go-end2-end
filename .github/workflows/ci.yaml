@@ -8,6 +8,10 @@ on:
       - 'helm/**'
       - 'k8s/**'
       - 'README.md'
+    tags:
+      - "stg-*"
+      - "prod-*"
+      - "qa-*"
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -67,7 +71,7 @@ jobs:
           context: .
           file: ./Dockerfile
           push: true
-          tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-end2-end:${{github.run_id}}
+          tags: ${{ secrets.DOCKERHUB_USERNAME }}/go-end2-end:${{github.ref_name}}
 
   update-newtag-in-helm-chart:
     runs-on: ubuntu-latest
