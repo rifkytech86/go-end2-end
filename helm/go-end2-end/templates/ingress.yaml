@@ -9,8 +9,7 @@ metadata:
 spec:
   ingressClassName: nginx
   rules:
-# - host: go-end2-end.local
-    - host: "*"
+    - host: go-end2-end.local
       http:
         paths:
           - pathType: Prefix
