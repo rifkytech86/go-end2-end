@@ -6,11 +6,11 @@ image:
   tag: "13724191259"
 
 ingress:
-  enabled: false
+  enabled: true
   className: ""
   annotations: {}
   hosts:
-    - host: chart-example.local
+    - host: "*"
       paths:
         - path: /
           pathType: ImplementationSpecific
