@@ -4,6 +4,7 @@ on:
     branches:
       - main
     path-ignore:
+      - 'helm/go-end2-end/values.yaml'
       - 'helm/**'
       - 'k8s/**'
       - 'README.md'
