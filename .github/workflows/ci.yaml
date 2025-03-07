@@ -8,6 +8,7 @@ on:
       - 'helm/**'
       - 'k8s/**'
       - 'README.md'
+  create:
     tags:
       - "stg-*"
       - "prod-*"
