@@ -420,6 +420,7 @@ https://18.206.161.89:31477/
 
 ```json
   kubectl get secrets -n argocd
+  kubectl edit secrets -n argocd
 ```
 
 
