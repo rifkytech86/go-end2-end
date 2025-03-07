@@ -85,7 +85,7 @@ jobs:
           ref: main
       - name: Update tag in Helm chart
         run: |
-          sed -i 's/tag: .*/tag: "${{github.run_id}}"/' helm/go-end2-end/values.yaml
+          sed -i 's/tag: .*/tag: "${{github.ref_name}}"/' helm/go-end2-end/values.yaml
       - name: Commit and push changes
         run: |
           git config --global user.email "rifkytech86@gmail.com"
