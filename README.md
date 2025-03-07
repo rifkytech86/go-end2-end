@@ -141,7 +141,7 @@
 # check service/ svc
    kubectl get svc
 ```
-
+:q:qa!
 3. Apply ingress 
 
 ```json
@@ -246,7 +246,7 @@ http://xxxx-xxxxx.elb.us-east-1.amazonaws.com
 ```
 
 
-get dress 
+get adress 
 ```json
 nslookup    xxxx-xxxxx.elb.us-east-1.amazonaws.com
 ```
@@ -364,6 +364,11 @@ helm uninstall  go-end2-end
 
 ```
 
+
+Upgrade 
+```json
+helm upgrade --install go-end2-end ./go-end2-end
+```
 
 
 ### START ci 
